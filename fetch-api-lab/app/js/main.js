@@ -29,10 +29,20 @@ function logError(error) {
 
 function fetchJSON() {
   // TODO
+  fetch('examples/non-existent.json')
+    .then(validateResponse)
+    .then(logResult)
+    .catch(logError);
 }
 const jsonButton = document.getElementById('json-btn');
 jsonButton.addEventListener('click', fetchJSON);
-
+// response validation
+function validateResponse(response) {
+  if (!response.ok) {
+    throw Error(response.statusText);
+  }
+  return response;
+}
 
 // Fetch Image ----------
 
